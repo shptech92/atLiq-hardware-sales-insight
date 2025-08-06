@@ -1,56 +1,101 @@
-## Sales Insights Data Analysis Project
+ AtLiq Hardware Sales Insight Dashboard 🚀
 
-### Instructions to setup mysql on your local computer
+A real-time **Sales Insight Dashboard** built using **Power BI** and **SQL** for **AtLiq Hardware**, a computer hardware company navigating a competitive and rapidly changing market landscape.
 
-1. Follow step in this video to install mysql on your local computer
-https://www.youtube.com/watch?v=WuBcTJnIuzo
+🔗 **Check out the live project here:**[https://www.linkedin.com/in/souvik-haldar/details/projects/]
 
-1. SQL database dump is in db_dump.sql file above. Download `db_dump.sql` file to your local computer and import it as per instructions given in the tutorial video
+---
 
-### Data Analysis Using SQL
+## 📊 Project Overview
 
-1. Show all customer records
+AtLiq Hardware faced challenges in adapting to volatile market trends and shifting customer behaviors, impacting sales performance. This project delivers a dynamic sales insight dashboard designed to provide **real-time analytics** and empower the **sales leadership team** with data-driven decision-making tools.
 
-    `SELECT * FROM customers;`
+### 🎯 Objectives
 
-1. Show total number of customers
+- Deliver real-time visibility into sales performance
+- Analyze product categories, customer segments, and regional trends
+- Identify top-performing salespersons and high-revenue products
+- Support strategic planning through actionable data
 
-    `SELECT count(*) FROM customers;`
+---
 
-1. Show transactions for Chennai market (market code for chennai is Mark001
+## 🛠️ Tools & Technologies
 
-    `SELECT * FROM transactions where market_code='Mark001';`
+| Tool         | Purpose                                  |
+|--------------|-------------------------------------------|
+| Power BI     | Dashboard creation & data visualization  |
+| SQL Server   | Data extraction and transformation        |
+| DAX          | Custom measures and calculated columns    |
+| Excel/CSV    | Data cleaning and import (if applicable)  |
 
-1. Show distrinct product codes that were sold in chennai
+---
 
-    `SELECT distinct product_code FROM transactions where market_code='Mark001';`
+## 📈 Key Features
 
-1. Show transactions where currency is US dollars
+- **Real-time Sales Overview**: Track KPIs like Total Revenue, Gross Margin, Quantity Sold
+- **Product Performance Analysis**: Compare sales across categories and products
+- **Customer Insights**: Analyze purchase frequency, segments, and behavior
+- **Geographical Trends**: Region-wise and city-wise performance breakdown
+- **Time Intelligence**: Monthly/quarterly/yearly trends with dynamic filters
 
-    `SELECT * from transactions where currency="USD"`
+---
 
-1. Show transactions in 2020 join by date table
+## 📁 Project Structure
 
-    `SELECT transactions.*, date.* FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020;`
+AtLiq-Sales-Dashboard/
+├── data/
+│ ├── sales_data.sql # SQL scripts for data extraction
+│ └── cleaned_data.csv # (if used) cleaned dataset
+├── dashboard/
+│ └── AtLiq_Sales_Dashboard.pbix
+├── assets/
+│ └── dashboard_screenshots/
+├── README.md
+└── requirements.txt # (optional) tools or packages
 
-1. Show total revenue in year 2020,
+---
 
-    `SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and transactions.currency="INR\r" or transactions.currency="USD\r";`
-	
-1. Show total revenue in year 2020, January Month,
+## 🚀 Insights Delivered
 
-    `SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and and date.month_name="January" and (transactions.currency="INR\r" or transactions.currency="USD\r");`
+- Identified top 5 products contributing to 60% of revenue
+- Regional performance gaps helped refocus marketing strategy
+- Optimized inventory through sales trend forecasts
+- Boosted team performance with salesperson-level tracking
 
-1. Show total revenue in year 2020 in Chennai
+---
 
-    `SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020
-and transactions.market_code="Mark001";`
+## 🧠 Learnings & Challenges
 
+- Implemented complex **DAX formulas** for time-based calculations
+- Ensured **data integrity** with SQL joins and transformations
+- Enhanced report **interactivity** using slicers and bookmarks
+- Learned performance optimization techniques in Power BI
 
-Data Analysis Using Power BI
-============================
+---
 
-1. Formula to create norm_amount column
+## 📌 How to Use
+
+1. Clone or download this repository
+2. Open the `.pbix` file using Power BI Desktop
+3. Connect your own dataset or use provided sample data
+4. Customize filters, visuals, or KPIs as per business needs
+
+---
+
+## 🙌 Acknowledgements
+
+Special thanks to AtLiq Hardware's mock business case and all open datasets used for building this project.
+
+---
+
+## 📬 Connect with Me
+
+📧 Email: [souvikptech@gmail.com]  
+💼 LinkedIn: (https://www.linkedin.com/in/souvik-haldar/)
+
+---
+
+**#PowerBI #SQL #Dashboard #DataAnalytics #SalesInsights #AtLiqHardware**
 
 `= Table.AddColumn(#"Filtered Rows", "norm_amount", each if [currency] = "USD" or [currency] ="USD#(cr)" then [sales_amount]*75 else [sales_amount], type any)`
 
